@@ -4,6 +4,7 @@ const {sequelize, Op} = require('./../db/sequelize');
 const Student = sequelize.define('Student', {
     student_Id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
@@ -21,7 +22,6 @@ const Student = sequelize.define('Student', {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
-
     },
     nic: {
         type: Sequelize.STRING,

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Student = require('./../model/student.js');
+const {Student} = require('./../model/student.js');
 
 /**
  * Content-type : application/json
