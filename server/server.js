@@ -4,17 +4,30 @@
  * @type {createApplication}
  */
 const express = require('express');
+const bodyParser = require('body-parser');
 const config = require('./config/config.js');
-const port = config.port;
 
 const app = express();
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+const port = config.port;
 
 /**
  * create tables
  */
+
 const createTable = require('./model/createTables.js');
 createTable();
 
-app.listen(port,()=>{
+/**
+ * User routes
+ */
+
+app.use('/', require('./routes/student.js'));
+
+app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
+
+
+
