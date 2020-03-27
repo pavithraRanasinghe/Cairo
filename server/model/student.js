@@ -1,66 +1,38 @@
 const Sequelize = require('sequelize');
 const {sequelize, Op} = require('./../db/sequelize');
+const {Guardian} = require('./../model/guardian.js');
+const {Stream} = require('./../model/stream.js');
 
 const Student = sequelize.define('Student', {
     student_Id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
+        primaryKey: true
     },
     name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true,
+        type: Sequelize.STRING
     },
     address: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true
+        type: Sequelize.STRING
     },
     contact: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true,
+        type: Sequelize.STRING
     },
     nic: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true,
-        unique: true
+        type: Sequelize.STRING
     },
     gender: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true
-    },
-    guardianName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        required: true,
-    },
-    guardianContact: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true,
-        required: true
-    },
-    guardianNic: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        required: true
-    },
-    subject1: {
-        type: Sequelize.STRING,
-    },
-    subject2: {
-        type: Sequelize.STRING,
-    },
-    subject3: {
-        type: Sequelize.STRING,
-    },
+        type: Sequelize.STRING
+    }
 });
+
+Student.belongsTo(Guardian, {
+    foreignKey: 'guardianId',
+    targetKey: 'guardianId',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
+Student.belongsTo(Stream, {foreignKey: 'streamId', targetKey: 'streamId', onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 module.exports = {Student};
 

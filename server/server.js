@@ -23,7 +23,12 @@ createTable();
  * User routes
  */
 
-app.use('/', require('./routes/student.js'));
+app.use('/', require('./routes/studentRoute.js'));
+app.use('/', require('./routes/subjectRoute.js'));
+app.use('/', require('./routes/streamRoute.js'));
+app.use('/', require('./routes/yearRoute.js'));
+
+
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
